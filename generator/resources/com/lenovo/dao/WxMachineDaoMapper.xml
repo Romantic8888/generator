@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lenovo.dao.WxMachineDao" >
+  <resultMap id="BaseResultMap" type="com.lenovo.pojo.po.WxMachine" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="machine_no" property="machineNo" jdbcType="VARCHAR" />
+    <result column="productline" property="productline" jdbcType="VARCHAR" />
+    <result column="ProductLineName" property="productlinename" jdbcType="VARCHAR" />
+    <result column="MachineClassId" property="machineclassid" jdbcType="VARCHAR" />
+    <result column="MachineClassName" property="machineclassname" jdbcType="VARCHAR" />
+    <result column="SubClassName" property="subclassname" jdbcType="VARCHAR" />
+    <result column="MachineSerialName" property="machineserialname" jdbcType="VARCHAR" />
+    <result column="ModelTypeName" property="modeltypename" jdbcType="VARCHAR" />
+    <result column="MaterialNo" property="materialno" jdbcType="VARCHAR" />
+    <result column="machine_name" property="machineName" jdbcType="VARCHAR" />
+    <result column="BrandTypeId" property="brandtypeid" jdbcType="VARCHAR" />
+    <result column="MaterialName" property="materialname" jdbcType="VARCHAR" />
+    <result column="treeid" property="treeid" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="warranty_date" property="warrantyDate" jdbcType="TIMESTAMP" />
+    <result column="treepic" property="treepic" jdbcType="VARCHAR" />
+    <result column="onSiteEndDate" property="onsiteenddate" jdbcType="TIMESTAMP" />
+    <result column="product_type" property="productType" jdbcType="VARCHAR" />
+    <result column="CatalogName" property="catalogname" jdbcType="VARCHAR" />
+    <result column="IsDisplayDevice" property="isdisplaydevice" jdbcType="VARCHAR" />
+    <result column="IsHost" property="ishost" jdbcType="VARCHAR" />
+    <result column="ModelType" property="modeltype" jdbcType="VARCHAR" />
+    <result column="ModelTypeId" property="modeltypeid" jdbcType="VARCHAR" />
+    <result column="ProductDate" property="productdate" jdbcType="TIMESTAMP" />
+    <result column="ScanDate" property="scandate" jdbcType="TIMESTAMP" />
+    <result column="WebTreeName" property="webtreename" jdbcType="VARCHAR" />
+    <result column="SaleArea" property="salearea" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      id, machine_no, productline, ProductLineName, MachineClassId, MachineClassName, SubClassName, 
+      MachineSerialName, ModelTypeName, MaterialNo, machine_name, BrandTypeId, MaterialName, 
+      treeid, source, create_by, create_time, update_by, update_time, memo, is_delete, 
+      warranty_date, treepic, onSiteEndDate, product_type, CatalogName, IsDisplayDevice, 
+      IsHost, ModelType, ModelTypeId, ProductDate, ScanDate, WebTreeName, SaleArea, flag
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lenovo.pojo.po.WxMachineQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wx_machine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    id,machine_no,productline,ProductLineName,MachineClassId,MachineClassName,SubClassName,MachineSerialName,ModelTypeName,MaterialNo,machine_name,BrandTypeId,MaterialName,treeid,source,create_by,create_time,update_by,update_time,memo,is_delete,warranty_date,treepic,onSiteEndDate,product_type,CatalogName,IsDisplayDevice,IsHost,ModelType,ModelTypeId,ProductDate,ScanDate,WebTreeName,SaleArea,flag
+    from wx_machine
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from wx_machine
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lenovo.pojo.po.WxMachineQuery" >
+    delete from wx_machine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lenovo.pojo.po.WxMachine" >
+    insert into wx_machine (id, machine_no, productline, 
+      ProductLineName, MachineClassId, MachineClassName, 
+      SubClassName, MachineSerialName, ModelTypeName, 
+      MaterialNo, machine_name, BrandTypeId, 
+      MaterialName, treeid, source, 
+      create_by, create_time, update_by, 
+      update_time, memo, is_delete, 
+      warranty_date, treepic, onSiteEndDate, 
+      product_type, CatalogName, IsDisplayDevice, 
+      IsHost, ModelType, ModelTypeId, 
+      ProductDate, ScanDate, WebTreeName, 
+      SaleArea, flag)
+    values (#{id,jdbcType=BIGINT}, #{machineNo,jdbcType=VARCHAR}, #{productline,jdbcType=VARCHAR}, 
+      #{productlinename,jdbcType=VARCHAR}, #{machineclassid,jdbcType=VARCHAR}, #{machineclassname,jdbcType=VARCHAR}, 
+      #{subclassname,jdbcType=VARCHAR}, #{machineserialname,jdbcType=VARCHAR}, #{modeltypename,jdbcType=VARCHAR}, 
+      #{materialno,jdbcType=VARCHAR}, #{machineName,jdbcType=VARCHAR}, #{brandtypeid,jdbcType=VARCHAR}, 
+      #{materialname,jdbcType=VARCHAR}, #{treeid,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{memo,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, 
+      #{warrantyDate,jdbcType=TIMESTAMP}, #{treepic,jdbcType=VARCHAR}, #{onsiteenddate,jdbcType=TIMESTAMP}, 
+      #{productType,jdbcType=VARCHAR}, #{catalogname,jdbcType=VARCHAR}, #{isdisplaydevice,jdbcType=VARCHAR}, 
+      #{ishost,jdbcType=VARCHAR}, #{modeltype,jdbcType=VARCHAR}, #{modeltypeid,jdbcType=VARCHAR}, 
+      #{productdate,jdbcType=TIMESTAMP}, #{scandate,jdbcType=TIMESTAMP}, #{webtreename,jdbcType=VARCHAR}, 
+      #{salearea,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lenovo.pojo.po.WxMachine" >
+    insert into wx_machine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="machineNo != null" >
+        machine_no,
+      </if>
+      <if test="productline != null" >
+        productline,
+      </if>
+      <if test="productlinename != null" >
+        ProductLineName,
+      </if>
+      <if test="machineclassid != null" >
+        MachineClassId,
+      </if>
+      <if test="machineclassname != null" >
+        MachineClassName,
+      </if>
+      <if test="subclassname != null" >
+        SubClassName,
+      </if>
+      <if test="machineserialname != null" >
+        MachineSerialName,
+      </if>
+      <if test="modeltypename != null" >
+        ModelTypeName,
+      </if>
+      <if test="materialno != null" >
+        MaterialNo,
+      </if>
+      <if test="machineName != null" >
+        machine_name,
+      </if>
+      <if test="brandtypeid != null" >
+        BrandTypeId,
+      </if>
+      <if test="materialname != null" >
+        MaterialName,
+      </if>
+      <if test="treeid != null" >
+        treeid,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="warrantyDate != null" >
+        warranty_date,
+      </if>
+      <if test="treepic != null" >
+        treepic,
+      </if>
+      <if test="onsiteenddate != null" >
+        onSiteEndDate,
+      </if>
+      <if test="productType != null" >
+        product_type,
+      </if>
+      <if test="catalogname != null" >
+        CatalogName,
+      </if>
+      <if test="isdisplaydevice != null" >
+        IsDisplayDevice,
+      </if>
+      <if test="ishost != null" >
+        IsHost,
+      </if>
+      <if test="modeltype != null" >
+        ModelType,
+      </if>
+      <if test="modeltypeid != null" >
+        ModelTypeId,
+      </if>
+      <if test="productdate != null" >
+        ProductDate,
+      </if>
+      <if test="scandate != null" >
+        ScanDate,
+      </if>
+      <if test="webtreename != null" >
+        WebTreeName,
+      </if>
+      <if test="salearea != null" >
+        SaleArea,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="machineNo != null" >
+        #{machineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productline != null" >
+        #{productline,jdbcType=VARCHAR},
+      </if>
+      <if test="productlinename != null" >
+        #{productlinename,jdbcType=VARCHAR},
+      </if>
+      <if test="machineclassid != null" >
+        #{machineclassid,jdbcType=VARCHAR},
+      </if>
+      <if test="machineclassname != null" >
+        #{machineclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="subclassname != null" >
+        #{subclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="machineserialname != null" >
+        #{machineserialname,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltypename != null" >
+        #{modeltypename,jdbcType=VARCHAR},
+      </if>
+      <if test="materialno != null" >
+        #{materialno,jdbcType=VARCHAR},
+      </if>
+      <if test="machineName != null" >
+        #{machineName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandtypeid != null" >
+        #{brandtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="materialname != null" >
+        #{materialname,jdbcType=VARCHAR},
+      </if>
+      <if test="treeid != null" >
+        #{treeid,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="warrantyDate != null" >
+        #{warrantyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="treepic != null" >
+        #{treepic,jdbcType=VARCHAR},
+      </if>
+      <if test="onsiteenddate != null" >
+        #{onsiteenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogname != null" >
+        #{catalogname,jdbcType=VARCHAR},
+      </if>
+      <if test="isdisplaydevice != null" >
+        #{isdisplaydevice,jdbcType=VARCHAR},
+      </if>
+      <if test="ishost != null" >
+        #{ishost,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltype != null" >
+        #{modeltype,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltypeid != null" >
+        #{modeltypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="productdate != null" >
+        #{productdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scandate != null" >
+        #{scandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webtreename != null" >
+        #{webtreename,jdbcType=VARCHAR},
+      </if>
+      <if test="salearea != null" >
+        #{salearea,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lenovo.pojo.po.WxMachineQuery" resultType="java.lang.Integer" >
+    select count(*) from wx_machine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wx_machine
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.machineNo != null" >
+        machine_no = #{record.machineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productline != null" >
+        productline = #{record.productline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productlinename != null" >
+        ProductLineName = #{record.productlinename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineclassid != null" >
+        MachineClassId = #{record.machineclassid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineclassname != null" >
+        MachineClassName = #{record.machineclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subclassname != null" >
+        SubClassName = #{record.subclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineserialname != null" >
+        MachineSerialName = #{record.machineserialname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modeltypename != null" >
+        ModelTypeName = #{record.modeltypename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialno != null" >
+        MaterialNo = #{record.materialno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineName != null" >
+        machine_name = #{record.machineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandtypeid != null" >
+        BrandTypeId = #{record.brandtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialname != null" >
+        MaterialName = #{record.materialname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeid != null" >
+        treeid = #{record.treeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=BIT},
+      </if>
+      <if test="record.warrantyDate != null" >
+        warranty_date = #{record.warrantyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.treepic != null" >
+        treepic = #{record.treepic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onsiteenddate != null" >
+        onSiteEndDate = #{record.onsiteenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productType != null" >
+        product_type = #{record.productType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catalogname != null" >
+        CatalogName = #{record.catalogname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdisplaydevice != null" >
+        IsDisplayDevice = #{record.isdisplaydevice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ishost != null" >
+        IsHost = #{record.ishost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modeltype != null" >
+        ModelType = #{record.modeltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modeltypeid != null" >
+        ModelTypeId = #{record.modeltypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productdate != null" >
+        ProductDate = #{record.productdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.scandate != null" >
+        ScanDate = #{record.scandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.webtreename != null" >
+        WebTreeName = #{record.webtreename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salearea != null" >
+        SaleArea = #{record.salearea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wx_machine
+    set id = #{record.id,jdbcType=BIGINT},
+      machine_no = #{record.machineNo,jdbcType=VARCHAR},
+      productline = #{record.productline,jdbcType=VARCHAR},
+      ProductLineName = #{record.productlinename,jdbcType=VARCHAR},
+      MachineClassId = #{record.machineclassid,jdbcType=VARCHAR},
+      MachineClassName = #{record.machineclassname,jdbcType=VARCHAR},
+      SubClassName = #{record.subclassname,jdbcType=VARCHAR},
+      MachineSerialName = #{record.machineserialname,jdbcType=VARCHAR},
+      ModelTypeName = #{record.modeltypename,jdbcType=VARCHAR},
+      MaterialNo = #{record.materialno,jdbcType=VARCHAR},
+      machine_name = #{record.machineName,jdbcType=VARCHAR},
+      BrandTypeId = #{record.brandtypeid,jdbcType=VARCHAR},
+      MaterialName = #{record.materialname,jdbcType=VARCHAR},
+      treeid = #{record.treeid,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=BIT},
+      warranty_date = #{record.warrantyDate,jdbcType=TIMESTAMP},
+      treepic = #{record.treepic,jdbcType=VARCHAR},
+      onSiteEndDate = #{record.onsiteenddate,jdbcType=TIMESTAMP},
+      product_type = #{record.productType,jdbcType=VARCHAR},
+      CatalogName = #{record.catalogname,jdbcType=VARCHAR},
+      IsDisplayDevice = #{record.isdisplaydevice,jdbcType=VARCHAR},
+      IsHost = #{record.ishost,jdbcType=VARCHAR},
+      ModelType = #{record.modeltype,jdbcType=VARCHAR},
+      ModelTypeId = #{record.modeltypeid,jdbcType=VARCHAR},
+      ProductDate = #{record.productdate,jdbcType=TIMESTAMP},
+      ScanDate = #{record.scandate,jdbcType=TIMESTAMP},
+      WebTreeName = #{record.webtreename,jdbcType=VARCHAR},
+      SaleArea = #{record.salearea,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lenovo.pojo.po.WxMachine" >
+    update wx_machine
+    <set >
+      <if test="machineNo != null" >
+        machine_no = #{machineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productline != null" >
+        productline = #{productline,jdbcType=VARCHAR},
+      </if>
+      <if test="productlinename != null" >
+        ProductLineName = #{productlinename,jdbcType=VARCHAR},
+      </if>
+      <if test="machineclassid != null" >
+        MachineClassId = #{machineclassid,jdbcType=VARCHAR},
+      </if>
+      <if test="machineclassname != null" >
+        MachineClassName = #{machineclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="subclassname != null" >
+        SubClassName = #{subclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="machineserialname != null" >
+        MachineSerialName = #{machineserialname,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltypename != null" >
+        ModelTypeName = #{modeltypename,jdbcType=VARCHAR},
+      </if>
+      <if test="materialno != null" >
+        MaterialNo = #{materialno,jdbcType=VARCHAR},
+      </if>
+      <if test="machineName != null" >
+        machine_name = #{machineName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandtypeid != null" >
+        BrandTypeId = #{brandtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="materialname != null" >
+        MaterialName = #{materialname,jdbcType=VARCHAR},
+      </if>
+      <if test="treeid != null" >
+        treeid = #{treeid,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="warrantyDate != null" >
+        warranty_date = #{warrantyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="treepic != null" >
+        treepic = #{treepic,jdbcType=VARCHAR},
+      </if>
+      <if test="onsiteenddate != null" >
+        onSiteEndDate = #{onsiteenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productType != null" >
+        product_type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogname != null" >
+        CatalogName = #{catalogname,jdbcType=VARCHAR},
+      </if>
+      <if test="isdisplaydevice != null" >
+        IsDisplayDevice = #{isdisplaydevice,jdbcType=VARCHAR},
+      </if>
+      <if test="ishost != null" >
+        IsHost = #{ishost,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltype != null" >
+        ModelType = #{modeltype,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltypeid != null" >
+        ModelTypeId = #{modeltypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="productdate != null" >
+        ProductDate = #{productdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scandate != null" >
+        ScanDate = #{scandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webtreename != null" >
+        WebTreeName = #{webtreename,jdbcType=VARCHAR},
+      </if>
+      <if test="salearea != null" >
+        SaleArea = #{salearea,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lenovo.pojo.po.WxMachine" >
+    update wx_machine
+    set machine_no = #{machineNo,jdbcType=VARCHAR},
+      productline = #{productline,jdbcType=VARCHAR},
+      ProductLineName = #{productlinename,jdbcType=VARCHAR},
+      MachineClassId = #{machineclassid,jdbcType=VARCHAR},
+      MachineClassName = #{machineclassname,jdbcType=VARCHAR},
+      SubClassName = #{subclassname,jdbcType=VARCHAR},
+      MachineSerialName = #{machineserialname,jdbcType=VARCHAR},
+      ModelTypeName = #{modeltypename,jdbcType=VARCHAR},
+      MaterialNo = #{materialno,jdbcType=VARCHAR},
+      machine_name = #{machineName,jdbcType=VARCHAR},
+      BrandTypeId = #{brandtypeid,jdbcType=VARCHAR},
+      MaterialName = #{materialname,jdbcType=VARCHAR},
+      treeid = #{treeid,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      memo = #{memo,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=BIT},
+      warranty_date = #{warrantyDate,jdbcType=TIMESTAMP},
+      treepic = #{treepic,jdbcType=VARCHAR},
+      onSiteEndDate = #{onsiteenddate,jdbcType=TIMESTAMP},
+      product_type = #{productType,jdbcType=VARCHAR},
+      CatalogName = #{catalogname,jdbcType=VARCHAR},
+      IsDisplayDevice = #{isdisplaydevice,jdbcType=VARCHAR},
+      IsHost = #{ishost,jdbcType=VARCHAR},
+      ModelType = #{modeltype,jdbcType=VARCHAR},
+      ModelTypeId = #{modeltypeid,jdbcType=VARCHAR},
+      ProductDate = #{productdate,jdbcType=TIMESTAMP},
+      ScanDate = #{scandate,jdbcType=TIMESTAMP},
+      WebTreeName = #{webtreename,jdbcType=VARCHAR},
+      SaleArea = #{salearea,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
